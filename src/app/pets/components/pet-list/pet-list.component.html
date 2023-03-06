@@ -1,0 +1,34 @@
+
+ <div class="container">
+
+     
+     <mat-chip-listbox >
+         <mat-chip-option *ngFor="let status of statuses" [selected]="status.selected" (click)="statusChange(status)">
+             {{status.label}}
+            </mat-chip-option>
+        </mat-chip-listbox>
+
+        <button mat-raised-button color="primary" routerLink="add-pet">Add Pet</button>
+    </div>
+  
+ 
+ <mat-grid-list cols="5">
+    <mat-grid-tile *ngFor="let pet of petList$ | async" style="padding: 0;">
+        <mat-card class="pet-card">
+            <mat-card-header>
+            <!-- <mat-icon>more_vert</mat-icon> -->
+                <div mat-card-avatar class="pet-header-image"></div>
+                <mat-card-title>{{pet.name}}</mat-card-title>
+                <mat-card-subtitle>{{pet.category ?  pet.category.name : 'N/A'}}</mat-card-subtitle>
+            </mat-card-header>
+
+            <mat-card-content>
+                <div>Status: <b>{{pet.status}}</b></div>
+
+                <div *ngFor="let url of pet.photoUrls">
+                  <img [src]="url"  (error)="replaceImage($event)"  [alt]="'Image ' + url" class="photo">
+                </div>
+              </mat-card-content>
+        </mat-card>
+   </mat-grid-tile>
+</mat-grid-list>

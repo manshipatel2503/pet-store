@@ -1,0 +1,66 @@
+
+<h3 class="title">Add Pet</h3>
+<div class="form-grp">
+<form [formGroup]="petForm" (ngSubmit)="onSubmit()" class="form-container">
+    <div class="form-row">
+      <div class="form-field">
+        <mat-form-field appearance="outline">
+          <mat-label>Name</mat-label>
+          <input matInput formControlName="name" required>
+          <mat-error *ngIf="petForm.controls['name'].invalid">
+            Name is required
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="form-field">
+        <mat-form-field appearance="outline">
+          <mat-label>Category</mat-label>
+          <input matInput formControlName="category" required>
+          <mat-error *ngIf="petForm.controls['category'].invalid">
+            Category is required
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-field">
+        <mat-form-field appearance="outline">
+          <mat-label>Status</mat-label>
+          <mat-select formControlName="status" required>
+            <mat-option *ngFor="let status of statuses" [value]="status.key">{{ status.label }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      </div>
+    
+    <div formArrayName="photoUrls" class="array-control">
+        <div *ngFor="let url of getPhotoUrls()?.controls; let i = index;">
+          <mat-form-field appearance="outline">
+            <input matInput [formControlName]="i" placeholder="Photo URL">
+          </mat-form-field>
+          <button mat-icon-button (click)="removePhotoUrl(i)" [disabled]="getPhotoUrls().controls?.length === 1">
+            <mat-icon>remove_circle_outline</mat-icon>
+          </button>
+        </div>
+        <button color="primary" mat-raised-button (click)="addPhotoUrl()">Add Photo URL</button>
+      </div>
+
+      <div formArrayName="tags" class="array-control">
+        <div *ngFor="let url of getTagUrl()?.controls; let i = index;">
+          <mat-form-field appearance="outline">
+            <input matInput [formControlName]="i" placeholder="Tags">
+          </mat-form-field>
+          <button mat-icon-button (click)="removeTag(i)" [disabled]="getTagUrl().controls?.length === 1">
+            <mat-icon>remove_circle_outline</mat-icon>
+          </button>
+        </div>
+        <button mat-raised-button  color="primary"(click)="addTag()">Add Tag</button>
+      </div>
+      <div class="footer">
+          <button mat-raised-button color="basic" type="submit" routerLink="">Back</button>
+          <button mat-raised-button color="primary" type="submit" [disabled]="petForm.invalid">Submit</button>
+
+      </div>
+</form>
+</div>

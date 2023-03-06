@@ -1,0 +1,25 @@
+.form-grp{
+    display: flex;
+    justify-content: center;
+}
+
+mat-form-field {
+    margin-bottom: 16px;
+    width: 500px;
+    
+}
+.array-control{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 5px;
+}
+
+.footer{
+    display: flex;
+    justify-content: space-between;
+}
+.title{
+    color: purple;
+    font-weight: 500;
+    font-size: 30px;
+}
